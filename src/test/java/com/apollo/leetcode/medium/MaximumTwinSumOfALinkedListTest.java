@@ -7,8 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.stream.Stream;
 
 import static com.apollo.leetcode.medium.MaximumTwinSumOfALinkedList.*;
@@ -16,17 +14,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MaximumTwinSumOfALinkedListTest implements ArgumentsProvider {
 
-    private static MaximumTwinSumOfALinkedList obj;
+    private static MaximumTwinSumOfALinkedList foo;
 
     @BeforeAll
     public static void init() {
-        obj = new MaximumTwinSumOfALinkedList();
+        foo = new MaximumTwinSumOfALinkedList();
     }
 
     @ParameterizedTest
     @ArgumentsSource(MaximumTwinSumOfALinkedListTest.class)
     public void test(ListNode head, int expectedResult) {
-        assertEquals(expectedResult, obj.pairSum(head));
+        assertEquals(expectedResult, foo.pairSum(head));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.apollo.leetcode.medium;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,9 +35,6 @@ public class MaximumTwinSumOfALinkedList {
     public static class ListNode {
         public int val;
         public ListNode next;
-
-        ListNode() {
-        }
 
         ListNode(int val) {
             this.val = val;
