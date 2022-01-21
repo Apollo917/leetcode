@@ -13,6 +13,6 @@ package com.apollo.leetcode.easy;
 public class CountOfMatchesInTournament {
 
     public int numberOfMatches(int n) {
-        return 0;
+        return n - 1;
     }
 }
