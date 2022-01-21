@@ -1,5 +1,6 @@
 package com.apollo.leetcode.medium;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,11 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BestTimeToBuyAndSellStockIITest implements ArgumentsProvider {
 
+    private static BestTimeToBuyAndSellStockII foo;
+
+    @BeforeAll
+    public static void init() {
+        foo = new BestTimeToBuyAndSellStockII();
+    }
+
     @ParameterizedTest
     @ArgumentsSource(BestTimeToBuyAndSellStockIITest.class)
     public void test(int[] input, int expectedResult) {
-        BestTimeToBuyAndSellStockII obj = new BestTimeToBuyAndSellStockII();
-        assertEquals(expectedResult, obj.start(input));
+        assertEquals(expectedResult, foo.start(input));
     }
 
     @Override
