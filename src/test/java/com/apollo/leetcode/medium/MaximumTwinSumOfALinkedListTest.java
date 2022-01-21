@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Stream;
 
+import static com.apollo.leetcode.medium.MaximumTwinSumOfALinkedList.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MaximumTwinSumOfALinkedListTest implements ArgumentsProvider {
@@ -24,16 +25,33 @@ public class MaximumTwinSumOfALinkedListTest implements ArgumentsProvider {
 
     @ParameterizedTest
     @ArgumentsSource(MaximumTwinSumOfALinkedListTest.class)
-    public void test(LinkedList<Integer> head, int expectedResult) {
+    public void test(ListNode head, int expectedResult) {
         assertEquals(expectedResult, obj.pairSum(head));
     }
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+        ListNode listNodeCase1 =
+                new ListNode(5,
+                        new ListNode(4,
+                                new ListNode(2,
+                                        new ListNode(1))));
+
+        ListNode listNodeCase2 =
+                new ListNode(4,
+                        new ListNode(2,
+                                new ListNode(2,
+                                        new ListNode(3))));
+
+        ListNode listNodeCase3 =
+                new ListNode(1,
+                        new ListNode(100000));
+
+
         return Stream.of(
-                Arguments.of(new LinkedList<>(Arrays.asList(5, 4, 2, 1)), 6),
-                Arguments.of(new LinkedList<>(Arrays.asList(4, 2, 2, 3)), 7),
-                Arguments.of(new LinkedList<>(Arrays.asList(1, 100000)), 100001)
+                Arguments.of(listNodeCase1, 6),
+                Arguments.of(listNodeCase2, 7),
+                Arguments.of(listNodeCase3, 100001)
         );
     }
 }

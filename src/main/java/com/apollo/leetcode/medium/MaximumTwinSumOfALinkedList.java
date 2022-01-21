@@ -1,6 +1,8 @@
 package com.apollo.leetcode.medium;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 2130. Maximum Twin Sum of a Linked List
@@ -14,7 +16,37 @@ import java.util.LinkedList;
  */
 public class MaximumTwinSumOfALinkedList {
 
-    public int pairSum(LinkedList<Integer> head) {
-        return 0;
+    public int pairSum(ListNode head) {
+        int result = 0;
+        List<Integer> values = new ArrayList<>();
+
+        ListNode next = head;
+        while (next != null) {
+            values.add(next.val);
+            next = next.next;
+        }
+
+        for (int i = 0; i < values.size() / 2; i++) {
+            result = Math.max(result, values.get(i) + values.get(values.size() - 1 - i));
+        }
+
+        return result;
+    }
+
+    public static class ListNode {
+        public int val;
+        public ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 }
