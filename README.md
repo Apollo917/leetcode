@@ -1,2 +1,2 @@
 # leetcode
-My leetcode tasks
+My leetcode solutions
