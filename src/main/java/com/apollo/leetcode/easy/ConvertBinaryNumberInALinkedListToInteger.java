@@ -11,15 +11,20 @@ package com.apollo.leetcode.easy;
 public class ConvertBinaryNumberInALinkedListToInteger {
 
     public int getDecimalValue(ListNode head) {
-        return 0;
+        int result = 0;
+
+        ListNode next = head;
+        while (next != null) {
+            result = (result | next.val) << 1;
+            next = next.next;
+        }
+
+        return result >> 1;
     }
 
     public static class ListNode {
         int val;
         ListNode next;
-
-        ListNode() {
-        }
 
         ListNode(int val) {
             this.val = val;
