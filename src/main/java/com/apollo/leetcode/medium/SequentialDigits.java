@@ -21,8 +21,12 @@ public class SequentialDigits {
             for (int offset = 0; offset + currentWidth <= sequence.length(); offset++) {
                 int value = Integer.parseInt(sequence.substring(offset, offset + currentWidth));
 
-                if (value >= low && value <= high) {
-                    result.add(value);
+                if(value >= low) {
+                    if(value <= high) {
+                        result.add(value);
+                    } else {
+                        return result;
+                    }
                 }
             }
         }
@@ -41,8 +45,12 @@ public class SequentialDigits {
                 int unadjustedValue = (int) (sequence * widthMultiplier);
                 int value = unadjustedValue - adjustment;
 
-                if (value >= low && value <= high) {
-                    result.add(value);
+                if(value >= low) {
+                    if(value <= high) {
+                        result.add(value);
+                    } else {
+                        return result;
+                    }
                 }
             }
         }
