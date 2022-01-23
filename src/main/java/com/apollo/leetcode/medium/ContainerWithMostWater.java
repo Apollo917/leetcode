@@ -13,6 +13,18 @@ package com.apollo.leetcode.medium;
 public class ContainerWithMostWater {
 
     public int maxArea(int[] height) {
-        return 0;
+        int result = 0;
+
+        for (int s = 0, e = height.length - 1; s < e; ) {
+            result = Math.max(result, Math.min(height[s], height[e]) * (e - s));
+
+            if (height[s] > height[e]) {
+                e--;
+            } else {
+                s++;
+            }
+        }
+
+        return result;
     }
 }
