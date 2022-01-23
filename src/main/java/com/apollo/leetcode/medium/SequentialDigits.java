@@ -21,7 +21,6 @@ public class SequentialDigits {
         int highWindowWidth = String.valueOf(high).length();
 
         for (int currentWidth = lowWindowWidth; currentWidth <= highWindowWidth; currentWidth++) {
-
             for (int offset = 0; offset + currentWidth <= sequence.length(); offset++) {
                 int value = Integer.parseInt(sequence.substring(offset, offset + currentWidth));
 
