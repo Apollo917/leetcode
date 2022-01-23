@@ -13,16 +13,33 @@ import java.util.List;
  */
 public class SequentialDigits {
 
-    public List<Integer> sequentialDigits(int low, int high) {
+    public List<Integer> sequentialDigitsOne(int low, int high) {
         List<Integer> result = new ArrayList<>();
         final String sequence = "123456789";
 
-        int lowWindowWidth = String.valueOf(low).length();
-        int highWindowWidth = String.valueOf(high).length();
-
-        for (int currentWidth = lowWindowWidth; currentWidth <= highWindowWidth; currentWidth++) {
+        for (int currentWidth = String.valueOf(low).length(); currentWidth <= String.valueOf(high).length(); currentWidth++) {
             for (int offset = 0; offset + currentWidth <= sequence.length(); offset++) {
                 int value = Integer.parseInt(sequence.substring(offset, offset + currentWidth));
+
+                if (value >= low && value <= high) {
+                    result.add(value);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public List<Integer> sequentialDigitsTwo(int low, int high) {
+        List<Integer> result = new ArrayList<>();
+        double sequence = 0.123456789;
+
+        for (int currentWidth = String.valueOf(low).length(); currentWidth <= String.valueOf(high).length(); currentWidth++) {
+            for (int offset = 0; offset + currentWidth <= 9; offset++) {
+                int widthMultiplier = (int) Math.pow(10, currentWidth + offset);
+                int adjustment = (int) (((int) (sequence * Math.pow(10, offset))) * Math.pow(10, currentWidth));
+                int unadjustedValue = (int) (sequence * widthMultiplier);
+                int value = unadjustedValue - adjustment;
 
                 if (value >= low && value <= high) {
                     result.add(value);

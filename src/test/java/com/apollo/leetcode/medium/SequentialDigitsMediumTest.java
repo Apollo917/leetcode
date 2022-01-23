@@ -24,8 +24,14 @@ public class SequentialDigitsMediumTest implements ArgumentsProvider {
 
     @ParameterizedTest
     @ArgumentsSource(SequentialDigitsMediumTest.class)
-    public void test(int low, int high, List<Integer> expectedResult) {
-        assertEquals(expectedResult, foo.sequentialDigits(low, high));
+    public void testOne(int low, int high, List<Integer> expectedResult) {
+        assertEquals(expectedResult, foo.sequentialDigitsOne(low, high));
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(SequentialDigitsMediumTest.class)
+    public void testTwo(int low, int high, List<Integer> expectedResult) {
+        assertEquals(expectedResult, foo.sequentialDigitsTwo(low, high));
     }
 
     @Override
