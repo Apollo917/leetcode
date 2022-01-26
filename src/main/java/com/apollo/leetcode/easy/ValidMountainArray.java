@@ -15,6 +15,29 @@ package com.apollo.leetcode.easy;
 public class ValidMountainArray {
 
     public boolean validMountainArray(int[] arr) {
-        return false;
+        if (arr.length < 3 || arr[0] >= arr[1] || arr[arr.length - 1] >= arr[arr.length - 2]) {
+            return false;
+        }
+
+        boolean peakFound = false;
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            int current = arr[i];
+            int next = arr[i + 1];
+
+            if (current == next) {
+                return false;
+            }
+
+            if (peakFound && current < next) {
+                return false;
+            }
+
+            if (!peakFound && current > next) {
+                peakFound = true;
+            }
+        }
+
+        return true;
     }
 }
