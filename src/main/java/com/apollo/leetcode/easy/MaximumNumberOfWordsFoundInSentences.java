@@ -12,6 +12,18 @@ package com.apollo.leetcode.easy;
 public class MaximumNumberOfWordsFoundInSentences {
 
     public int mostWordsFound(String[] sentences) {
-        return 0;
+        int result = 0;
+
+        for (String sentence : sentences) {
+            int sentenceWordsCount = 1;
+
+            for (char ch : sentence.toCharArray()) {
+                if (ch == ' ') sentenceWordsCount++;
+            }
+
+            result = Math.max(result, sentenceWordsCount);
+        }
+
+        return result;
     }
 }
