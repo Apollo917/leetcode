@@ -24,8 +24,14 @@ public class DesignBrowserHistoryTest implements ArgumentsProvider {
 
     @ParameterizedTest
     @ArgumentsSource(DesignBrowserHistoryTest.class)
-    public void test(List<String> commands, List<String> args, List<String> expectedResult) {
-        assertEquals(expectedResult, foo.useBrowserHistory(commands, args));
+    public void testBrowserHistoryOne(List<String> commands, List<String> args, List<String> expectedResult) {
+        assertEquals(expectedResult, foo.useBrowserHistoryOne(commands, args));
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(DesignBrowserHistoryTest.class)
+    public void testBrowserHistoryTwo(List<String> commands, List<String> args, List<String> expectedResult) {
+        assertEquals(expectedResult, foo.useBrowserHistoryTwo(commands, args));
     }
 
     @Override

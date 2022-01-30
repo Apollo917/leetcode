@@ -1,6 +1,8 @@
 package com.apollo.leetcode.medium;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 1472. Design Browser History
@@ -20,7 +22,140 @@ import java.util.*;
  */
 public class DesignBrowserHistory {
 
-    public List<String> useBrowserHistory(List<String> commands, List<String> args) {
+    private static abstract class BrowserHistory {
+
+        public BrowserHistory(String homepage) {
+            initHomepage(homepage);
+        }
+
+        protected abstract void initHomepage(String homepage);
+
+        public abstract void visit(String url);
+
+        public abstract String back(int steps);
+
+        public abstract String forward(int steps);
+    }
+
+    private static class BrowserHistoryOne extends BrowserHistory {
+        private List<String> history;
+        private int historyLevel = 0;
+
+        public BrowserHistoryOne(String homepage) {
+            super(homepage);
+        }
+
+        @Override
+        protected void initHomepage(String homepage) {
+            history = new ArrayList<>();
+            history.add(homepage);
+        }
+
+        @Override
+        public void visit(String url) {
+            if (historyLevel < history.size() - 1) {
+                history = history.subList(0, historyLevel + 1);
+            }
+
+            history.add(url);
+            historyLevel++;
+        }
+
+        @Override
+        public String back(int steps) {
+            historyLevel = Math.max(0, historyLevel - steps);
+            return history.get(historyLevel);
+        }
+
+        @Override
+        public String forward(int steps) {
+            historyLevel = Math.min(history.size() - 1, historyLevel + steps);
+            return history.get(historyLevel);
+        }
+    }
+
+    private static class BrowserHistoryTwo extends BrowserHistory {
+        private BrowserHistoryItem history;
+
+        public BrowserHistoryTwo(String homepage) {
+            super(homepage);
+        }
+
+        @Override
+        protected void initHomepage(String homepage) {
+            history = new BrowserHistoryItem(homepage);
+        }
+
+        @Override
+        public void visit(String url) {
+            BrowserHistoryItem item = new BrowserHistoryItem(url);
+            history.setNext(item);
+            history = item;
+        }
+
+        @Override
+        public String back(int steps) {
+            while (steps > 0 && history.getPrev() != null) {
+                history = history.getPrev();
+                steps--;
+            }
+            return history.getUrl();
+        }
+
+        @Override
+        public String forward(int steps) {
+            while (steps > 0 && history.getNext() != null) {
+                history = history.getNext();
+                steps--;
+            }
+            return history.getUrl();
+        }
+    }
+
+    private static class BrowserHistoryItem {
+        private final String url;
+        private BrowserHistoryItem prev;
+        private BrowserHistoryItem next;
+
+        public BrowserHistoryItem(String url) {
+            this.url = url;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public BrowserHistoryItem getPrev() {
+            return prev;
+        }
+
+        public void setPrev(BrowserHistoryItem prev) {
+            prev.next = this;
+            this.prev = prev;
+        }
+
+        public BrowserHistoryItem getNext() {
+            return next;
+        }
+
+        public void setNext(BrowserHistoryItem next) {
+            next.prev = this;
+            this.next = next;
+        }
+    }
+
+    public List<String> useBrowserHistoryOne(List<String> commands, List<String> args) {
+        return useBrowserHistory(commands, args, BrowserHistoryOne::new);
+    }
+
+    public List<String> useBrowserHistoryTwo(List<String> commands, List<String> args) {
+        return useBrowserHistory(commands, args, BrowserHistoryTwo::new);
+    }
+
+    private List<String> useBrowserHistory(List<String> commands,
+                                           List<String> args,
+                                           BrowserHistoryFactory factory) {
+
         List<String> result = new ArrayList<>();
         BrowserHistory browserHistory = null;
 
@@ -33,7 +168,7 @@ public class DesignBrowserHistory {
 
             switch (command) {
                 case BrowserCommands.BROWSER_HISTORY:
-                    browserHistory = new BrowserHistory(arg);
+                    browserHistory = factory.create(arg);
                     result.add(null);
                     break;
                 case BrowserCommands.VISIT:
@@ -59,33 +194,10 @@ public class DesignBrowserHistory {
         return new IllegalStateException("BrowserHistory isn't initialized");
     }
 
-    private static class BrowserHistory {
-        private List<String> history;
-        private int historyLevel = 0;
+    @FunctionalInterface
+    private interface BrowserHistoryFactory {
 
-        public BrowserHistory(String homepage) {
-            history = new ArrayList<>();
-            history.add(homepage);
-        }
-
-        public void visit(String url) {
-            if (historyLevel < history.size() - 1) {
-                history = history.subList(0, historyLevel + 1);
-            }
-
-            history.add(url);
-            historyLevel++;
-        }
-
-        public String back(int steps) {
-            historyLevel = Math.max(0, historyLevel - steps);
-            return history.get(historyLevel);
-        }
-
-        public String forward(int steps) {
-            historyLevel = Math.min(history.size() - 1, historyLevel + steps);
-            return history.get(historyLevel);
-        }
+        BrowserHistory create(String homepage);
     }
 
     public static class BrowserCommands {
