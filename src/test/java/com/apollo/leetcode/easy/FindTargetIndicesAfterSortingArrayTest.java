@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -33,7 +34,9 @@ public class FindTargetIndicesAfterSortingArrayTest implements ArgumentsProvider
         return Stream.of(
                 Arguments.of(new int[]{1, 2, 5, 2, 3}, 2, Arrays.asList(1, 2)),
                 Arguments.of(new int[]{1, 2, 5, 2, 3}, 3, Arrays.asList(3)),
-                Arguments.of(new int[]{1, 2, 5, 2, 3}, 5, Arrays.asList(4))
+                Arguments.of(new int[]{1, 2, 5, 2, 3}, 5, Arrays.asList(4)),
+                Arguments.of(new int[]{1, 2, 5, 2, 3}, 4, Collections.EMPTY_LIST),
+                Arguments.of(new int[]{100, 1, 100}, 100, Arrays.asList(1, 2))
         );
     }
 }

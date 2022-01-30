@@ -1,7 +1,10 @@
 package com.apollo.leetcode.easy;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * 2089. Find Target Indices After Sorting Array
@@ -15,6 +18,44 @@ import java.util.List;
 public class FindTargetIndicesAfterSortingArray {
 
     public List<Integer> targetIndices(int[] nums, int target) {
-        return null;
+        Arrays.sort(nums);
+        int targetIndex = Arrays.binarySearch(nums, target);
+
+        if (targetIndex < 0) {
+            return new ArrayList<>();
+        }
+
+        int leftBoundIndex = targetIndex;
+        int rightBoundIndex = targetIndex;
+
+        while (true) {
+            leftBoundIndex--;
+
+            if (leftBoundIndex < 0) {
+                leftBoundIndex++;
+                break;
+            }
+
+            if (nums[leftBoundIndex] != target) {
+                leftBoundIndex = leftBoundIndex + 1;
+                break;
+            }
+        }
+
+        while (true) {
+            rightBoundIndex++;
+
+            if (rightBoundIndex >= nums.length) {
+                rightBoundIndex--;
+                break;
+            }
+
+            if (nums[rightBoundIndex] != target) {
+                rightBoundIndex = rightBoundIndex - 1;
+                break;
+            }
+        }
+
+        return IntStream.range(leftBoundIndex, rightBoundIndex + 1).boxed().collect(Collectors.toList());
     }
 }
