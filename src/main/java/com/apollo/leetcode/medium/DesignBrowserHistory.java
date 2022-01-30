@@ -1,8 +1,6 @@
 package com.apollo.leetcode.medium;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 1472. Design Browser History
@@ -62,21 +60,31 @@ public class DesignBrowserHistory {
     }
 
     private static class BrowserHistory {
+        private List<String> history;
+        private int historyLevel = 0;
 
         public BrowserHistory(String homepage) {
-
+            history = new ArrayList<>();
+            history.add(homepage);
         }
 
         public void visit(String url) {
+            if (historyLevel < history.size() - 1) {
+                history = history.subList(0, historyLevel + 1);
+            }
 
+            history.add(url);
+            historyLevel++;
         }
 
         public String back(int steps) {
-            return null;
+            historyLevel = Math.max(0, historyLevel - steps);
+            return history.get(historyLevel);
         }
 
         public String forward(int steps) {
-            return null;
+            historyLevel = Math.min(history.size() - 1, historyLevel + steps);
+            return history.get(historyLevel);
         }
     }
 
