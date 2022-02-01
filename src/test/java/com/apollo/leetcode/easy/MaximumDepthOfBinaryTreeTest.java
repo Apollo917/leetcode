@@ -44,7 +44,7 @@ public class MaximumDepthOfBinaryTreeTest implements ArgumentsProvider {
         MaximumDepthOfBinaryTree.TreeNode tree2node1 = new MaximumDepthOfBinaryTree.TreeNode(1);
         MaximumDepthOfBinaryTree.TreeNode tree2node2 = new MaximumDepthOfBinaryTree.TreeNode(2);
 
-        tree1node1.setRight(tree2node2);
+        tree2node1.setRight(tree2node2);
 
         return Stream.of(
                 Arguments.of(tree1node1, 3),

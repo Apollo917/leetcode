@@ -11,13 +11,28 @@ package com.apollo.leetcode.easy;
 public class MaximumDepthOfBinaryTree {
 
     public int maxDepth(TreeNode root) {
-        return 0;
+        if (root == null) return 0;
+        return get(root, 1);
+    }
+
+    public int get(TreeNode root, int depth) {
+        int result = depth;
+
+        if (root.left != null) {
+            result = Math.max(result, get(root.left, depth + 1));
+        }
+
+        if (root.right != null) {
+            result = Math.max(result, get(root.right, depth + 1));
+        }
+
+        return result;
     }
 
     public static class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
+        int val;
+        TreeNode left;
+        TreeNode right;
 
         TreeNode() {
         }
