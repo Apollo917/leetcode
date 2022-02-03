@@ -3,9 +3,18 @@ package com.apollo.leetcode.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 120. Triangle
+ * <p>
+ * Given a triangle array, return the minimum path sum from top to bottom.
+ * For each step, you may move to an adjacent number of the row below. More formally,
+ * if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.
+ *
+ * @see <a href="https://leetcode.com/problems/triangle/">Triangle<a/>
+ */
+//TODO: Dig deeper
 public class Triangle {
 
-    //TODO: Dig deeper
     public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle.size() == 0) return 0;
         if (triangle.size() == 1) return triangle.get(0).get(0);

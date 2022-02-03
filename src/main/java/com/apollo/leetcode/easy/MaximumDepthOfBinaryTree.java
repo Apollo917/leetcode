@@ -8,6 +8,7 @@ package com.apollo.leetcode.easy;
  *
  * @see <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">Maximum Depth of Binary Tree<a/>
  */
+//TODO: Dig deeper
 public class MaximumDepthOfBinaryTree {
 
     public int maxDepth(TreeNode root) {
