@@ -22,6 +22,25 @@ public class SearchInABinarySearchTree {
         return root.val < val ? searchBST(root.right, val) : searchBST(root.left, val);
     }
 
+    //Haven't noticed that tree left node always < val and right node > val
+    /*TreeNode result = null;
+
+    if (root == null) {
+        return null;
+    } else if (root.val == val) {
+        return root;
+    }
+
+    if (root.left != null) {
+        result = searchBST(root.left, val);
+    }
+
+    if (result == null && root.right != null) {
+        result = searchBST(root.right, val);
+    }
+
+    return result;*/
+
     public static class TreeNode {
         int val;
         TreeNode left;
