@@ -44,6 +44,13 @@ public class TriangleTest implements ArgumentsProvider {
                         Arrays.asList(
                                 Arrays.asList(-10)
                         ), -10
+                ),
+                Arguments.of(
+                        Arrays.asList(
+                                Arrays.asList(-1),
+                                Arrays.asList(2, 3),
+                                Arrays.asList(1, -1, -3)
+                        ), -1
                 )
         );
     }
